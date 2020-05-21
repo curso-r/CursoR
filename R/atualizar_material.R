@@ -50,15 +50,18 @@ atualizar_material <- function(curso) {
 
 
   arquivos <- list.files(paste0(repo, "-master/temp/"), full.names = TRUE)
-
+  message("Arquivos novos:")
+  message("------------------------------")
   for (arq in arquivos) {
     file.copy(
       from = arq,
       to = getwd(),
       recursive = TRUE
     )
+    message(arq)
   }
-
+  message("------------------------------")
+  message("Tudo pronto!")
   unlink(paste0(repo, "-master"), recursive = TRUE)
 
 }

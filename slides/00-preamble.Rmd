@@ -1,0 +1,12 @@
+
+```{r, include=FALSE}
+`%>%` <- magrittr::`%>%`
+blue <- function(x) {
+  glue::glue(
+    '<span style="color:#6495ed; font-weight: bold;">{x}</span>'
+  ) %>% 
+    htmltools::HTML()
+}
+
+options(width = 85)
+```
