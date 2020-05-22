@@ -11,22 +11,24 @@
 #'
 #' - r4ds1: R para Ciência de Dados 1
 #'
-#' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Com o projeto do curso R para Ciência de Dados 1 aberto, rode:
+#' atualizar_material("r4ds1")
+#' }
 #'
-#' atualizar_matarial("r4ds1")
+#' @export
 atualizar_material <- function(curso) {
 
   if (!existe_proj_aberto()) {
-    message(paste0(
-      "Essa função pode não funcionar corretamente se você não ",
-      "estiver no repositório do curso. Deseja continuar?"
-      ))
-    res <- utils::menu(c("Não", "Sim"))
+    usethis::ui_info(paste0(
+      "Essa fun\u00e7\u00e3o pode n\u00e3o funcionar corretamente se voc\u00ea n\u00e3o ",
+      "estiver no reposit\u00f3rio do curso. Deseja continuar?"
+    ))
+    res <- utils::menu(c("N\u00e3o", "Sim"))
     if (res == 1) {
-      stop("Abra o repositório do curso antes de atualizar o material.")
+      usethis::ui_stop("Abra o reposit\u00f3rio do curso antes de atualizar o material.")
     }
   }
 
@@ -37,7 +39,7 @@ atualizar_material <- function(curso) {
     r4ds1 = "intro-programacao-em-r-mestre"
   )
 
-  download.file(
+  utils::download.file(
     url = paste0(
       "https://github.com/curso-r/",
       repo,
@@ -46,22 +48,20 @@ atualizar_material <- function(curso) {
     destfile = temp
   )
 
-  unzip(temp)
-
-
-  arquivos <- list.files(paste0(repo, "-master/temp/"), full.names = TRUE)
-  message("Arquivos novos:")
-  message("------------------------------")
+  utils::unzip(temp)
+  arquivos <- list.files(paste0(repo, "-master/temp"), full.names = TRUE)
+  usethis::ui_info("Arquivos novos:")
+  usethis::ui_line("-------------------------------------------")
   for (arq in arquivos) {
     file.copy(
       from = arq,
       to = getwd(),
       recursive = TRUE
     )
-    message(arq)
+    usethis::ui_done(arq)
   }
-  message("------------------------------")
-  message("Tudo pronto!")
+  usethis::ui_line("-------------------------------------------")
+  usethis::ui_done("Tudo pronto!")
   unlink(paste0(repo, "-master"), recursive = TRUE)
 
 }
@@ -71,3 +71,11 @@ existe_proj_aberto <- function() {
   arquivos <- list.files(wd)
   any(grepl(".Rproj", arquivos))
 }
+
+#' @rdname atualizar_material
+#'
+#' @export
+atualizar_material_r4ds1 <- function() {
+  atualizar_material("r4ds1")
+}
+
