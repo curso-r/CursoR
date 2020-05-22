@@ -2,9 +2,12 @@
 % Please edit documentation in R/atualizar_material.R
 \name{atualizar_material}
 \alias{atualizar_material}
+\alias{atualizar_material_r4ds1}
 \title{Atualiza o material de um curso}
 \usage{
 atualizar_material(curso)
+
+atualizar_material_r4ds1()
 }
 \arguments{
 \item{curso}{Uma string indicando o curso que você está fazendo. Veja
@@ -22,7 +25,9 @@ As opções do argumento curso são:
 }
 }
 \examples{
+\dontrun{
 # Com o projeto do curso R para Ciência de Dados 1 aberto, rode:
+atualizar_material("r4ds1")
+}
 
-atualizar_matarial("r4ds1")
 }
