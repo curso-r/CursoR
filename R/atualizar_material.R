@@ -10,6 +10,9 @@
 #' @details As opções do argumento curso são:
 #'
 #' - r4ds1: R para Ciência de Dados 1
+#' - r4ds2: R para Ciência de Dados 2
+#' - webscraping: Web Scraping em R
+#' - machinelearning: Introdução ao Machine Learning com R
 #'
 #'
 #' @examples
@@ -34,10 +37,19 @@ atualizar_material <- function(curso) {
 
   temp <- tempfile(fileext = ".zip")
 
+
   repo <- switch(
     curso,
-    r4ds1 = "intro-programacao-em-r-mestre"
+    r4ds1 = "intro-programacao-em-r-mestre",
+    webscraping = "web-scraping-mestre",
+    r4ds2 = "r4ds2-mestre",
+    machine_learning = "intro-ml-v2-mestre",
+    NULL
   )
+
+  if(is.null(repo)){
+    usethis::ui_stop("O curso {usethis::ui_value(curso)} não existe.")
+  }
 
   utils::download.file(
     url = paste0(
@@ -52,13 +64,26 @@ atualizar_material <- function(curso) {
   arquivos <- list.files(paste0(repo, "-master/temp"), full.names = TRUE)
   usethis::ui_info("Arquivos novos:")
   usethis::ui_line("-------------------------------------------")
+
   for (arq in arquivos) {
-    file.copy(
-      from = arq,
-      to = getwd(),
-      recursive = TRUE
-    )
-    usethis::ui_done(arq)
+    sep <- strsplit(arq,'/')
+    nome_arquivo <- sep[[1]][length(sep[[1]])]
+    caminho <- paste0(getwd(), '')
+
+    sub <- TRUE
+    if(file.exists(caminho)){
+      sub <- usethis::ui_yeah(paste({usethis::ui_value(nome_arquivo)},"já existe. Você deseja substituí-lo?"))
+    }
+
+    if(sub){
+      file.copy(
+        from = arq,
+        to = getwd(),
+        recursive = TRUE,
+        overwrite = TRUE
+      )
+      usethis::ui_done(arq)
+    }
   }
   usethis::ui_line("-------------------------------------------")
   usethis::ui_done("Tudo pronto!")
@@ -76,6 +101,13 @@ existe_proj_aberto <- function() {
 #'
 #' @export
 atualizar_material_r4ds1 <- function() {
-  atualizar_material("r4ds1")
+  curso <- rstudioapi::showPrompt('',
+  "Digite o código do seu curso. Se você não souber digite ajuda")
+
+  if(curso == "ajuda"){
+    help(atualizar_material)
+  }else{
+  atualizar_material(curso)
+  }
 }
 
