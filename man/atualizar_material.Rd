@@ -2,16 +2,9 @@
 % Please edit documentation in R/atualizar_material.R
 \name{atualizar_material}
 \alias{atualizar_material}
-\alias{atualizar_material_r4ds1}
 \title{Atualiza o material de um curso}
 \usage{
-atualizar_material(curso)
-
-atualizar_material_r4ds1()
-}
-\arguments{
-\item{curso}{Uma string indicando o curso que você está fazendo. Veja
-as opções abaixo.}
+atualizar_material()
 }
 \description{
 Esta função baixa o repositório do curso no Github e atualiza o material
@@ -19,15 +12,21 @@ criando ou substituindo apenas os arquivos novos. Para funcionar
 corretamente, você precisa estar com o projeto do curso aberto.
 }
 \details{
-As opções do argumento curso são:
+Confira o código do seu curso:
 \itemize{
-\item r4ds1: R para Ciência de Dados 1
+\item Introdução ao Machine Learning com R: machinelearning
+\item R para Ciência de Dados 1: r4ds1
+\item R para Ciência de Dados 2: r4ds2
+\item Web Scraping em R: webscraping
 }
 }
 \examples{
 \dontrun{
-# Com o projeto do curso R para Ciência de Dados 1 aberto, rode:
-atualizar_material("r4ds1")
+
+# Com o projeto do seu curso aberto, rode:
+atualizar_material("codigo-do-curso")
+
+# Os códigos estão listados na seção Details acima.
 }
 
 }
