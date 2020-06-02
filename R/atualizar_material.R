@@ -4,22 +4,24 @@
 #' criando ou substituindo apenas os arquivos novos. Para funcionar
 #' corretamente, você precisa estar com o projeto do curso aberto.
 #'
-#' @param curso Uma string indicando o curso que você está fazendo. Veja
-#' as opções abaixo.
+#' @details Confira o código do seu curso:
 #'
-#' @details As opções do argumento curso são:
-#'
-#' - r4ds1: R para Ciência de Dados 1
-#'
+#' - Introdução ao Machine Learning com R: machinelearning
+#' - R para Ciência de Dados 1: r4ds1
+#' - R para Ciência de Dados 2: r4ds2
+#' - Web Scraping em R: webscraping
 #'
 #' @examples
 #' \dontrun{
-#' # Com o projeto do curso R para Ciência de Dados 1 aberto, rode:
-#' atualizar_material("r4ds1")
+#'
+#' # Com o projeto do seu curso aberto, rode:
+#' atualizar_material("codigo-do-curso")
+#'
+#' # Os códigos estão listados na seção Details acima.
 #' }
 #'
 #' @export
-atualizar_material <- function(curso) {
+atualizar_material <- function() {
 
   if (!existe_proj_aberto()) {
     usethis::ui_info(paste0(
@@ -32,12 +34,30 @@ atualizar_material <- function(curso) {
     }
   }
 
+  curso <- rstudioapi::showPrompt(
+    '',
+    "Digite o código do seu curso.\nSe você não souber o código, digite 'ajuda'."
+  )
+
+  if (curso %in% c("ajuda", "'ajuda'")) {
+    usethis::ui_info("Verifique o código do seu curso na seção Details.")
+    return(help(atualizar_material))
+  }
+
   temp <- tempfile(fileext = ".zip")
 
   repo <- switch(
     curso,
-    r4ds1 = "intro-programacao-em-r-mestre"
+    r4ds1 = "intro-programacao-em-r-mestre",
+    webscraping = "web-scraping-mestre",
+    r4ds2 = "r4ds2-mestre",
+    machine_learning = "intro-ml-v2-mestre",
+    NULL
   )
+
+  if (is.null(repo)) {
+    usethis::ui_stop("O curso {usethis::ui_value(curso)} não existe.")
+  }
 
   utils::download.file(
     url = paste0(
@@ -49,19 +69,35 @@ atualizar_material <- function(curso) {
   )
 
   utils::unzip(temp)
-  arquivos <- list.files(paste0(repo, "-master/temp"), full.names = TRUE)
+  arquivos <- list.files(
+    paste0(repo, "-master/temp"),
+    recursive = TRUE,
+    full.names = TRUE
+  )
+
   usethis::ui_info("Arquivos novos:")
   usethis::ui_line("-------------------------------------------")
+
   for (arq in arquivos) {
-    file.copy(
-      from = arq,
-      to = getwd(),
-      recursive = TRUE
-    )
-    usethis::ui_done(arq)
+
+    dest <- gsub(".*temp/", "", arq)
+    wd <- getwd()
+
+    if (!file.exists(dest)) {
+      if (!dir.exists(dirname(dest))) {
+        dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
+      }
+      file.copy(
+        from = arq,
+        to = paste(getwd(), dest, sep = "/"),
+        overwrite = FALSE
+      )
+      usethis::ui_done(dest)
+    }
+
   }
   usethis::ui_line("-------------------------------------------")
-  usethis::ui_done("Tudo pronto!")
+  usethis::ui_done("Material atualizado!")
   unlink(paste0(repo, "-master"), recursive = TRUE)
 
 }
@@ -70,12 +106,5 @@ existe_proj_aberto <- function() {
   wd <- getwd()
   arquivos <- list.files(wd)
   any(grepl(".Rproj", arquivos))
-}
-
-#' @rdname atualizar_material
-#'
-#' @export
-atualizar_material_r4ds1 <- function() {
-  atualizar_material("r4ds1")
 }
 
