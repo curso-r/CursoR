@@ -10,6 +10,7 @@
 #' - R para Ciência de Dados 1: r4ds1
 #' - R para Ciência de Dados 2: r4ds2
 #' - Web Scraping em R: webscraping
+#' -
 #'
 #' @examples
 #' \dontrun{
@@ -34,24 +35,35 @@ atualizar_material <- function() {
     }
   }
 
-  curso <- rstudioapi::showPrompt(
-    '',
-    "Digite o código do seu curso.\nSe você não souber o código, digite 'ajuda'."
+  cursos <- c(
+    "Introdução ao Machine Learning com R",
+    "R para Ciência de Dados 1",
+    "R para Ciência de Dados 2",
+    "Dashboards com R",
+    "Web Scraping em R"
   )
 
-  if (curso %in% c("ajuda", "'ajuda'")) {
-    usethis::ui_info("Verifique o código do seu curso na seção Details.")
-    return(help(atualizar_material))
-  }
+  curso <- select.list(cursos)
+
+  # curso <- rstudioapi::showPrompt(
+  #   '',
+  #   "Digite o código do seu curso.\nSe você não souber o código, digite 'ajuda'."
+  # )
+
+  # if (curso %in% c("ajuda", "'ajuda'")) {
+  #   usethis::ui_info("Verifique o código do seu curso na seção Details.")
+  #   return(help(atualizar_material))
+  # }
 
   temp <- tempfile(fileext = ".zip")
 
   repo <- switch(
     curso,
-    r4ds1 = "intro-programacao-em-r-mestre",
-    webscraping = "web-scraping-mestre",
-    r4ds2 = "r4ds2-mestre",
-    machine_learning = "intro-ml-v2-mestre",
+    `R para Ciência de Dados 1` = "intro-programacao-em-r-mestre",
+    `Web Scraping em R` = "web-scraping-mestre",
+    `R para Ciência de Dados 2` = "r4ds2-mestre",
+    `Introdução ao Machine Learning com R` = "intro-ml-v2-mestre",
+    `Dashboards com R` = "dashboard-mestre",
     NULL
   )
 
@@ -69,18 +81,34 @@ atualizar_material <- function() {
   )
 
   utils::unzip(temp)
-  arquivos <- list.files(
-    paste0(repo, "-master/temp"),
-    recursive = TRUE,
-    full.names = TRUE
-  )
+
+  arquivos_para_ler <- readLines(paste0(repo, "-master/material.txt"))
+  arquivos <- NULL
+
+  for (arq in arquivos_para_ler) {
+
+    if (dir.exists(paste0(repo, "-master/", arq))) {
+      lista <- list.files(
+        paste0(repo, "-master/", arq),
+        recursive = TRUE,
+        full.names = TRUE
+      )
+    } else {
+      lista <- arq
+    }
+
+    arquivos <- c(arquivos, lista)
+
+  }
 
   usethis::ui_info("Arquivos novos:")
   usethis::ui_line("-------------------------------------------")
 
+  i <- 0
+
   for (arq in arquivos) {
 
-    dest <- gsub(".*temp/", "", arq)
+    dest <- gsub(".*master/", "", arq)
     wd <- getwd()
 
     if (!file.exists(dest)) {
@@ -93,8 +121,12 @@ atualizar_material <- function() {
         overwrite = FALSE
       )
       usethis::ui_done(dest)
+      i <- i + 1
     }
 
+  }
+  if (i == 0) {
+    usethis::ui_done("Nenhum arquivo precisou ser atualizado!")
   }
   usethis::ui_line("-------------------------------------------")
   usethis::ui_done("Material atualizado!")
