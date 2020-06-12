@@ -45,16 +45,6 @@ atualizar_material <- function() {
 
   curso <- select.list(cursos)
 
-  # curso <- rstudioapi::showPrompt(
-  #   '',
-  #   "Digite o código do seu curso.\nSe você não souber o código, digite 'ajuda'."
-  # )
-
-  # if (curso %in% c("ajuda", "'ajuda'")) {
-  #   usethis::ui_info("Verifique o código do seu curso na seção Details.")
-  #   return(help(atualizar_material))
-  # }
-
   temp <- tempfile(fileext = ".zip")
 
   repo <- switch(
