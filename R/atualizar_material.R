@@ -4,21 +4,10 @@
 #' criando ou substituindo apenas os arquivos novos. Para funcionar
 #' corretamente, você precisa estar com o projeto do curso aberto.
 #'
-#' @details Confira o código do seu curso:
-#'
-#' - Introdução ao Machine Learning com R: machinelearning
-#' - R para Ciência de Dados 1: r4ds1
-#' - R para Ciência de Dados 2: r4ds2
-#' - Web Scraping em R: webscraping
-#' -
-#'
 #' @examples
 #' \dontrun{
-#'
 #' # Com o projeto do seu curso aberto, rode:
-#' atualizar_material("codigo-do-curso")
-#'
-#' # Os códigos estão listados na seção Details acima.
+#' atualizar_material()
 #' }
 #'
 #' @export
