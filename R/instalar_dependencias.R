@@ -11,7 +11,8 @@
 instalar_dependencias <- function() {
 
   cursos <- c(
-    "Dashboards com R"
+    "Dashboards com R",
+    "Introdução ao Machine Learning com R"
   )
 
   curso <- select.list(cursos)
@@ -22,6 +23,12 @@ instalar_dependencias <- function() {
       "tidyverse",
       "shiny", "shinydashboard", "reactlog",
       "rmarkdown", "knitr", "flexdashboard"
+    ),
+    `Introdução ao Machine Learning com R` = c(
+      "tidyverse", "tidymodels", "rmarkdown", "knitr",
+      "ISLR", "glmnet", "xgboost", "randomForest",
+      "ranger", "rpart", "rpart.plot", "pROC", "vip", "modeldata",
+      "usemodels", "tidypredict"
     ),
     NULL
   )
