@@ -11,22 +11,10 @@ Esta função baixa o repositório do curso no Github e atualiza o material
 criando ou substituindo apenas os arquivos novos. Para funcionar
 corretamente, você precisa estar com o projeto do curso aberto.
 }
-\details{
-Confira o código do seu curso:
-\itemize{
-\item Introdução ao Machine Learning com R: machinelearning
-\item R para Ciência de Dados 1: r4ds1
-\item R para Ciência de Dados 2: r4ds2
-\item Web Scraping em R: webscraping
-}
-}
 \examples{
 \dontrun{
-
 # Com o projeto do seu curso aberto, rode:
-atualizar_material("codigo-do-curso")
-
-# Os códigos estão listados na seção Details acima.
+atualizar_material()
 }
 
 }
