@@ -32,7 +32,7 @@ instalar_dependencias <- function() {
       "ranger", "rpart", "rpart.plot", "pROC", "vip", "modeldata",
       "usemodels", "tidypredict", "jpeg"
     ),
-    github = c("RobertMyles/modelscript")
+    github = c("RobertMyles/modelscript", "allisonhorst/palmerpenguins")
     ),
     NULL
   )
