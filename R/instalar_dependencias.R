@@ -31,7 +31,7 @@ instalar_dependencias <- function() {
       "ISLR", "glmnet", "xgboost", "randomForest",
       "ranger", "rpart", "rpart.plot", "pROC", "vip", "modeldata",
       "usemodels", "tidypredict", "jpeg", "MASS", "skimr", "DataExplorer",
-      "skimr", "naniar"
+      "skimr", "naniar", "patchwork"
     ),
     github = c("RobertMyles/modelscript", "allisonhorst/palmerpenguins")
     ),
