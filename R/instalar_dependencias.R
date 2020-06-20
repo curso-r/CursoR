@@ -30,7 +30,7 @@ instalar_dependencias <- function() {
       "tidyverse", "tidymodels", "rmarkdown", "knitr",
       "ISLR", "glmnet", "xgboost", "randomForest",
       "ranger", "rpart", "rpart.plot", "pROC", "vip", "modeldata",
-      "usemodels", "tidypredict", "jpeg"
+      "usemodels", "tidypredict", "jpeg", "MASS"
     ),
     github = c("RobertMyles/modelscript", "allisonhorst/palmerpenguins")
     ),
