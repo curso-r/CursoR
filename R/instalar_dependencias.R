@@ -11,6 +11,7 @@
 instalar_dependencias <- function() {
 
   cursos <- c(
+    "R para Ciência de Dados I",
     "Dashboards com R",
     "Introdução ao Machine Learning com R"
   )
@@ -19,6 +20,13 @@ instalar_dependencias <- function() {
 
   pacotes <- switch(
     curso,
+    `R para Ciência de Dados I` = list(cran = c(
+      "tidyverse", "rmarkdown", "knitr","skimr",
+      "readxl", "writexl", "openxlsx", "haven",
+      "DBI", "RSQLite", "jsonlite"
+    ),
+    github = c()
+    ),
     `Dashboards com R` = list(cran = c(
       "tidyverse",
       "shiny", "shinydashboard", "reactlog",
