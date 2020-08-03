@@ -10,11 +10,11 @@
 criar_readme <- function() {
 
   cursos <- c(
-    "Introdução ao Machine Learning com R",
+    "Introdução ao Machine Learning",
     "R para Ciência de Dados 1",
     "R para Ciência de Dados 2",
-    "Dashboards com R",
-    "Web Scraping em R"
+    "Dashboards",
+    "Web Scraping"
   )
 
   curso <- select.list(cursos)
@@ -43,6 +43,7 @@ criar_readme <- function() {
   texto <- readLines(arq_dest)
   texto <- gsub("_main_repo_", repo, texto)
   texto <- gsub("_repo_turma_", turma, texto)
+  texto <- gsub("_nome_curso_", curso, texto)
   writeLines(texto, arq_dest, sep = "\n")
 
   rstudioapi::navigateToFile(arq_dest)
