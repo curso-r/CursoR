@@ -1,0 +1,48 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+main_repo <- "_main_repo_"
+turma <- "_repo_turma_"
+```
+
+## Baixar ou atualizar material
+
+```
+install.packages("remotes")
+remotes::install_github("curso-r/CursoR")
+
+CursoR::atualizar_material()
+```
+
+## Slides
+
+```{r, echo = FALSE}
+knitr::kable(
+  tibble::tibble(
+    slide = CursoR:::list_github_files(main_repo, "slides/", "html"),
+    link = paste0("https://curso-r.github.io/", main_repo, "/", slide)
+  )
+)
+```
+
+## Scripts usados em aula
+
+```{r, echo = FALSE}
+knitr::kable(
+  tibble::tibble(
+    script = list.files("R/", pattern = ".R"),
+    link = paste0("https://curso-r.github.io/", turma, "/exemplos/", script)
+  )
+)
+```
+
+
