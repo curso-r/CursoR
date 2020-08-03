@@ -40,9 +40,9 @@ atualizar_material <- function() {
     curso,
     `R para Ciência de Dados 1` = "intro-programacao-em-r-mestre",
     `Web Scraping em R` = "web-scraping-mestre",
-    `R para Ciência de Dados 2` = "r4ds2-mestre",
+    `R para Ciência de Dados 2` = "main-r4ds2",
     `Introdução ao Machine Learning com R` = "intro-ml-v2-mestre",
-    `Dashboards com R` = "dashboard-mestre",
+    `Dashboards com R` = "main-dashboards",
     NULL
   )
 
