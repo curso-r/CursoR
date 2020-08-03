@@ -21,9 +21,8 @@ list_github_files <- function(repo, dir = NULL, ext = NULL) {
   }
 
   if (!is.null(ext)) {
-    arquivos <- arquivos[grep("html$", arquivos)]
+    arquivos <- arquivos[grep(paste0(ext, "$"), arquivos)]
   }
 
   return(arquivos)
-
 }
