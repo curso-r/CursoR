@@ -17,6 +17,7 @@ Imports:
     usethis,
     rstudioapi,
     magrittr,
-    usethis
+    usethis,
+    purrr
 Suggests: 
     remotes

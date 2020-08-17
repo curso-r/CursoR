@@ -26,3 +26,42 @@ list_github_files <- function(repo, dir = NULL, ext = NULL) {
 
   return(arquivos)
 }
+
+
+# Lista repositórios do Github da Curso-R
+list_github_repos <- function(curso) {
+
+  res <- purrr::map(
+    c(1, 2),
+    ~ httr::GET(
+      "https://api.github.com/orgs/curso-r/repos",
+      query = list(
+        type = "public",
+        per_page = 100,
+        direction = "desc",
+        page = .x
+      )
+    )
+  )
+
+  lista_repos <- purrr::map(res, httr::content) %>%
+    purrr::flatten()
+
+  tab_repos <- purrr::map_dfr(
+    lista_repos,
+    ~ tibble::tibble(
+      nome = .x$name,
+      url = .x$owner$html_url
+    )
+  )
+
+  tab_repos %>%
+    dplyr::filter(
+      stringr::str_detect(nome, curso),
+      !stringr::str_detect(nome, "main-")
+    ) %>%
+    dplyr::mutate(
+
+    )
+
+}
