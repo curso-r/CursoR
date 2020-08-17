@@ -57,7 +57,7 @@ listar_turmas_recentes <- function(curso) {
     lista_repos,
     ~ tibble::tibble(
       Turma = .x$name,
-      URL = .x$owner$html_url
+      URL = .x$html_url
     )
   )
 
