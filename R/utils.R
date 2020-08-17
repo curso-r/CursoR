@@ -50,18 +50,34 @@ list_github_repos <- function(curso) {
   tab_repos <- purrr::map_dfr(
     lista_repos,
     ~ tibble::tibble(
-      nome = .x$name,
-      url = .x$owner$html_url
+      Turma = .x$name,
+      URL = .x$owner$html_url
     )
   )
 
   tab_repos %>%
     dplyr::filter(
-      stringr::str_detect(nome, curso),
-      !stringr::str_detect(nome, "main-")
+      stringr::str_detect(Turma, curso),
+      !stringr::str_detect(Turma, "main-")
     ) %>%
     dplyr::mutate(
-
-    )
+      data = lubridate::make_date(
+        stringr::str_sub(Turma, 1, 4),
+        stringr::str_sub(Turma, 5, 6),
+        "01"
+      ),
+      Turma = paste(
+        lubridate::month(
+          data,
+          label = TRUE,
+          abbr = FALSE,
+          locale = "pt_BR.UTF-8"
+        ),
+        "de",
+        lubridate::year(data)
+      )
+    ) %>%
+    dplyr::arrange(data) %>%
+    dplyr::select(-data)
 
 }

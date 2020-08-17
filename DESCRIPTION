@@ -18,6 +18,8 @@ Imports:
     rstudioapi,
     magrittr,
     usethis,
-    purrr
+    purrr,
+    lubridate,
+    stringr
 Suggests: 
     remotes
