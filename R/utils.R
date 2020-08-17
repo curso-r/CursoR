@@ -44,8 +44,14 @@ list_github_repos <- function(curso) {
     )
   )
 
-  lista_repos <- purrr::map(res, httr::content) %>%
+  purrr::map(res, httr::content) %>%
     purrr::flatten()
+
+}
+
+listar_turmas_recentes <- function(curso) {
+
+  lista_repos <- list_github_repos(curso)
 
   tab_repos <- purrr::map_dfr(
     lista_repos,
@@ -77,7 +83,7 @@ list_github_repos <- function(curso) {
         lubridate::year(data)
       )
     ) %>%
-    dplyr::arrange(data) %>%
+    dplyr::arrange(desc(data)) %>%
     dplyr::select(-data)
 
 }
