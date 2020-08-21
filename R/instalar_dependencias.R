@@ -52,10 +52,12 @@ instalar_dependencias <- function() {
     github = c("RobertMyles/modelscript", "allisonhorst/palmerpenguins")
     ),
     `Regressão Linear` = list(cran = c(
-      "tidyverse", "writexl",
-      "readxl", "janitor", "broom"
+      "tidyverse", "tidymodels", "rmarkdown", "knitr",
+      "ISLR", "glmnet", "janitor", "broom", "vip", "modeldata",
+      "usemodels", "tidypredict", "MASS", "DataExplorer",
+      "skimr", "naniar", "readxl", "lime", "GGally", "car"
     ),
-    github = c()
+    github = c("allisonhorst/palmerpenguins")
     ),
     NULL
   )
