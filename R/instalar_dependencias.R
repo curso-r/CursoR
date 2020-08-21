@@ -13,8 +13,9 @@ instalar_dependencias <- function() {
   cursos <- c(
     "R para Ciência de Dados I",
     "R para Ciência de Dados II",
-    "Dashboards com R",
-    "Introdução ao Machine Learning com R"
+    "Regressão Linear",
+    "Introdução ao Machine Learning com R",
+    "Dashboards com R"
   )
 
   curso <- select.list(cursos)
@@ -29,7 +30,7 @@ instalar_dependencias <- function() {
     github = c()
     ),
     `R para Ciência de Dados II` = list(cran = c(
-      "tidyverse", "rmarkdown", "knitr",
+      "tidyverse", "rmarkdown", "knitr", "janitor",
       "readxl", "writexl", "shiny"
     ),
     github = c()
@@ -49,6 +50,12 @@ instalar_dependencias <- function() {
       "skimr", "naniar", "patchwork"
     ),
     github = c("RobertMyles/modelscript", "allisonhorst/palmerpenguins")
+    ),
+    `Regressão Linear` = list(cran = c(
+      "tidyverse", "writexl",
+      "readxl", "janitor", "broom"
+    ),
+    github = c()
     ),
     NULL
   )

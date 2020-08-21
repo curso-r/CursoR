@@ -25,9 +25,10 @@ atualizar_material <- function() {
   }
 
   cursos <- c(
-    "Introdução ao Machine Learning com R",
     "R para Ciência de Dados 1",
     "R para Ciência de Dados 2",
+    "Regressão Linear",
+    "Introdução ao Machine Learning com R",
     "Dashboards com R",
     "Web Scraping em R"
   )
@@ -43,6 +44,7 @@ atualizar_material <- function() {
     `R para Ciência de Dados 2` = "main-r4ds-2",
     `Introdução ao Machine Learning com R` = "main-intro-ml",
     `Dashboards com R` = "main-dashboards",
+    `Regressão Linear` = "main-regressao-linear",
     NULL
   )
 
