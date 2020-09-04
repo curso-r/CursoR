@@ -31,7 +31,8 @@ instalar_dependencias <- function() {
     ),
     `R para Ciência de Dados II` = list(cran = c(
       "tidyverse", "rmarkdown", "knitr", "janitor",
-      "readxl", "writexl", "shiny"
+      "readxl", "writexl", "shiny", "gghighlight",
+      "gganimate", "sf"
     ),
     github = c()
     ),
