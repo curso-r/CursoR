@@ -53,10 +53,12 @@ instalar_dependencias <- function() {
     github = c("RobertMyles/modelscript", "allisonhorst/palmerpenguins")
     ),
     `Regressão Linear` = list(cran = c(
-      "tidyverse", "writexl",
-      "readxl", "janitor", "broom"
+      "tidyverse", "tidymodels", "rmarkdown", "knitr",
+      "ISLR", "glmnet", "janitor", "broom", "vip",
+      "tidypredict", "MASS",
+      "skimr", "naniar", "readxl", "lime", "GGally", "car"
     ),
-    github = c()
+    github = c("allisonhorst/palmerpenguins")
     ),
     NULL
   )
@@ -72,22 +74,24 @@ instalar_dependencias <- function() {
   cat("\n")
 
   res <- usethis::ui_yeah(
-    "Deseja continuar:",
+    "Atenção: Isso pode demorar de 5 a 15 minutos. Deseja continuar?",
     yes = c("Sim", "Com certeza"),
-    no = c("Não", "De maneira nenhuma", "Na-na-ni-na-não")
+    no = c("Não", "De maneira nenhuma", "Negativo")
   )
 
   if (res) {
-    install.packages(pacotes$cran)
-    usethis::ui_done("Processo finalizado. Verifique se os pacotes foram instalados com sucesso.")
+    for(pkg in pacotes$cran) {
+      if(!pkg %in% loadedNamespaces()) install.packages(pkg)
+    }
     if(!is.null(pacotes$github)) {
+      if(!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes")
+      }
       for (pkg in pacotes$github) {
-        if(!requireNamespace("remotes", quietly = TRUE)) {
-          install.packages("remotes")
-        }
         remotes::install_github(pkg, force = TRUE)
       }
     }
+    usethis::ui_done("Processo finalizado. Verifique se os pacotes foram instalados com sucesso.")
   } else {
     usethis::ui_oops("Processo de instalação cancelado.")
   }
