@@ -57,14 +57,19 @@ listar_turmas_recentes <- function(curso) {
     lista_repos,
     ~ tibble::tibble(
       Turma = .x$name,
-      Github = .x$html_url
+      Github = .x$html_url,
+      arquivado = .$archived,
+      data = .x$created_at
     )
   )
 
   tab_repos %>%
+    dplyr::mutate(ano = lubridate::year(lubridate::as_date(data))) %>%
     dplyr::filter(
+      ano >= lubridate::year(Sys.Date()) - 1,
       stringr::str_detect(Turma, curso),
-      !stringr::str_detect(Turma, "main-")
+      !stringr::str_detect(Turma, "main-"),
+      !arquivado
     ) %>%
     dplyr::mutate(
       Material = paste0("https://curso-r.github.io/", Turma),

@@ -40,7 +40,7 @@ atualizar_material <- function() {
   repo <- switch(
     curso,
     `R para Ciência de Dados 1` = "main-r4ds-1",
-    `Web Scraping em R` = "web-scraping-mestre",
+    `Web Scraping em R` = "main-web-scraping",
     `R para Ciência de Dados 2` = "main-r4ds-2",
     `Introdução ao Machine Learning com R` = "main-intro-ml",
     `Dashboards com R` = "main-dashboards",
