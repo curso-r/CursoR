@@ -94,3 +94,13 @@ listar_turmas_recentes <- function(curso) {
     dplyr::select(Turma, Material, Github)
 
 }
+
+#'
+criar_arquivo_atualizacao <- function() {
+  file.copy(
+    from = system.file("material.txt", package = "CursoR"),
+    to = "./"
+  )
+  invisible(TRUE)
+}
+
