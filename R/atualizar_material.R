@@ -30,7 +30,8 @@ atualizar_material <- function() {
     "Regressão Linear",
     "Introdução ao Machine Learning com R",
     "Dashboards com R",
-    "Web Scraping em R"
+    "Web Scraping em R",
+    "Deploy"
   )
 
   curso <- select.list(cursos)
@@ -45,6 +46,7 @@ atualizar_material <- function() {
     `Introdução ao Machine Learning com R` = "main-intro-ml",
     `Dashboards com R` = "main-dashboards",
     `Regressão Linear` = "main-regressao-linear",
+    `Deploy` = "main-deploy",
     NULL
   )
 
