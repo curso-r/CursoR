@@ -29,9 +29,12 @@ atualizar_material <- function() {
     "R para Ciência de Dados 2",
     "Regressão Linear",
     "Introdução ao Machine Learning com R",
+    "XGBoost",
+    "Deep Learning",
     "Dashboards com R",
     "Web Scraping em R",
-    "Deploy"
+    "Deploy",
+    "Rcpp"
   )
 
   curso <- select.list(cursos)
@@ -47,6 +50,9 @@ atualizar_material <- function() {
     `Dashboards com R` = "main-dashboards",
     `Regressão Linear` = "main-regressao-linear",
     `Deploy` = "main-deploy",
+    `Rcpp` = "main-rcpp",
+    `Deep Learning` = "main-deep-learning",
+    `XGBoost` = "main-xgboost",
     NULL
   )
 
