@@ -96,11 +96,11 @@ listar_turmas_recentes <- function(curso) {
 }
 
 #'
-criar_arquivo_atualizacao <- function() {
+criar_arquivo_material <- function() {
   file.copy(
     from = system.file("material.txt", package = "CursoR"),
     to = "./"
   )
-  invisible(TRUE)
+  rstudioapi::navigateToFile("material.txt")
 }
 
