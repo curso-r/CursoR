@@ -1,0 +1,545 @@
+---
+title: "Introdução ao R"
+description: "Exercícios da aula sobre Introdução ao R, do curso 'R para Ciência de Dados I'"
+output: 
+  learnr::tutorial:
+    css: css/custom.css
+    progressive: true
+    allow_skip: true
+
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Exercícios**
+
+> Boas vindas! 
+>
+> Este material faz parte do curso [R para Ciência de Dados I](https://www.curso-r.com/cursos/r4ds-1/), da [Curso-R](https://www.curso-r.com/).
+>
+> Caso tenha dúvidas, pedimos que escreva no [<i class="fab fa-discourse"></i> Discourse](https://discourse.curso-r.com/).
+
+## Objetos
+
+
+A) Crie um vetor com o nome de três frutas (maçã, banana, melancia) e guarde em um objeto chamado `frutas`.
+
+```{r objetos-a, exercise = TRUE}
+
+```
+
+```{r objetos-a-hint-1}
+frutas __ c(___, ___, ___)
+```
+
+```{r objetos-a-hint-2}
+frutas <- c(___, ___, ___)
+```
+
+```{r objetos-a-solution}
+frutas <- c("maçã", "banana", "melancia")
+```
+
+```{r include=FALSE}
+frutas <- c("maçã", "banana", "melancia")
+```
+
+b) Use a função `length()` para contar o tamanho do vetor. Certifique-se que retorna 3.
+
+```{r objetos-b, exercise = TRUE}
+
+```
+
+```{r objetos-b-hint}
+length(_____)
+```
+
+```{r objetos-b-solution}
+length(frutas)
+```
+
+c) Use `[]` para retornar a primeira fruta do vetor.
+
+```{r objetos-c, exercise = TRUE}
+
+```
+
+```{r objetos-c-hint-1}
+frutas[__]
+```
+
+```{r objetos-c-solution}
+frutas[1]
+```
+d) Observe a saída de `paste("eu gosto de", frutas)` e verifique se o tamanho do vetor mudou.
+
+```{r objetos-d, exercise = TRUE}
+
+```
+```{r objetos-d-solution}
+paste("eu gosto de", frutas)
+# O tamanho do vetor continua o mesmo: 3.
+# O R aplicou a função `paste()` para cada elemento do vetor frutas. 
+```
+
+## Dataframes
+
+A base de dados `airquality` apresenta dados de qualidade do ar obtidos diariamente, em Nova York, entre os meses de maio e setembro de 1973:
+
+```{r dados-airquality, echo=TRUE}
+airquality
+```
+
+Use o data.frame airquality para responder às questões abaixo:
+
+a) Quantas colunas `airquality` tem?
+
+```{r df-a, exercise = TRUE}
+
+```
+
+```{r df-a-hint}
+___(airquality)
+```
+
+```{r df-a-solution}
+ncol(airquality)
+```
+
+b) Quantas linhas `airquality` tem?
+
+```{r df-b, exercise = TRUE}
+
+```
+
+```{r df-b-hint}
+___(airquality)
+```
+
+```{r df-b-solution}
+nrow(airquality)
+```
+
+c) O que a função `head()` retorna?
+
+```{r df-c, exercise = TRUE}
+
+```
+
+```{r df-c-hint}
+___(airquality)
+```
+
+```{r df-c-solution}
+head(airquality)
+# A função head() retorna as 6 primeiras linhas da base.
+```
+
+d) Quais são os nomes das colunas?
+
+```{r df-d, exercise = TRUE}
+
+```
+
+```{r df-d-hint}
+___(airquality)
+```
+
+```{r df-d-solution}
+colnames(airquality)
+```
+
+e) Qual é a classe da coluna `Ozone`? Dicas: `class()` e `$`
+
+```{r df-e, exercise = TRUE}
+
+```
+
+```{r df-e-hint}
+class(airquality______)
+```
+
+```{r df-e-solution}
+class(airquality$Ozone)
+```
+f) O que o código `dplyr::glimpse(airquality)` retorna?
+
+```{r df-f, exercise = TRUE}
+
+```
+
+
+```{r df-f-solution}
+dplyr::glimpse(airquality)
+
+# A função glimpse() do pacote dpyr retorna várias informações interessantes:
+# O número de linhas
+# O número de colunas
+# O nome das colunas
+# O tipo de cada coluna
+# Algumas observações da coluna, para ter uma ideia dos dados disponíveis.
+```
+
+g) Utilizando a resposta da questão anterior, quais são os tipos de cada coluna da tabela `airquality`?
+
+
+## Vetores e funções
+
+a) Analise as duas linhas de códigos abaixo. Os resultados são iguais? Porquê?
+
+```{r vetores-a, exercise = TRUE}
+c(1,2,3) - 1           # código 1
+c(1,2,3) - c(1,1,1)    # código 2
+```
+
+```{r vetores-a-solution}
+c(1,2,3) - 1           # código 1
+c(1,2,3) - c(1,1,1)    # código 2
+
+# Os resultados são iguais.
+# No caso do código 1, como foi solicitado subtrair usando vetores de tamanhos diferentes, o R reciclou o segundo elemento.
+# No caso do código 2, a subtração foi feita baseado na posição dos vetores. Exemplo: 1-1, 2-1, 3-1.
+```
+
+b) Considere o vetor booleano abaixo:
+
+
+```{r vetores-b, echo=TRUE}
+dolar_subiu <- c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, TRUE)
+```
+
+Este vetor tem informação de uma semana (7 dias) indicando se o dolar subiu (`TRUE`) (ou não subiu - `FALSE`) no respectivo dia.
+
+Interprete os resultados dos códigos abaixo:
+
+I) `length(dolar_subiu)`
+
+```{r vetores-b-i, exercise = TRUE}
+
+```
+
+```{r vetores-b-i-solution}
+length(dolar_subiu)
+
+# A função length retorna o tamanho do vetor. 
+# O vetor 'dolar_subiu' possui 7 elementos.
+```
+
+II) `dolar_subiu[2]`  (ps: a semana começa no domingo)
+
+```{r vetores-b-ii, exercise = TRUE}
+
+```
+
+```{r vetores-b-ii-solution}
+dolar_subiu[2]
+
+# O segundo elemento selecionado representa a segunda-feira.
+# Na segunda-feira, o dolar subiu (TRUE).
+```
+
+III) `sum(dolar_subiu)`
+
+```{r vetores-b-iii, exercise = TRUE}
+
+```
+
+```{r vetores-b-iii-solution}
+sum(dolar_subiu)
+
+# A função sum() realiza a soma dos elementos do vetor.
+# Como o vetor possui dados do tipo lógico (TRUE ou FALSE), o R entende que TRUE = 1 e FALSE = 0.
+# O resultado de sum(dolar_subiu) é 4, portanto o dólar subiu em 4 dias na semana. 
+```
+
+IV) `mean(dolar_subiu)`
+
+```{r vetores-b-iv, exercise = TRUE}
+
+```
+
+```{r vetores-b-iv-solution}
+mean(dolar_subiu)
+
+# A função sum() realiza a média dos elementos do vetor.
+# O resultado representa a média de dias em que o dólar subiu.
+```
+c) Agora observe a saída de `as.numeric(dolar_subiu)`. O que o R fez?
+
+```{r vetores-c, exercise = TRUE}
+
+```
+
+```{r vetores-c-solution}
+as.numeric(dolar_subiu)
+
+# A função as.numeric() transforma um vetor em numérico (quando possível).
+# No vetor que o R retornou, TRUE foi transformado em 1, e FALSE foi transformado em 0.
+```
+## Desafio
+
+Use o data.frame `airquality` para responder às questões abaixo. __Vamos calcular o desvio padrão de Ozone sem usar a função `sd()`__.
+
+
+
+```{r, echo=TRUE}
+airquality
+```
+
+  a) tire a média da coluna `Ozone`. Dica: use `mean(x, na.rm = TRUE)`.
+  b) subtraia da coluna` Ozone` a sua própria média (centralização).
+  c) eleve o vetor ao quadrado.
+  d) tire a média do vetor.
+  e) tire a raíz quadrada.
+  f) compare o resultado com `sd(airquality$Ozone, na.rm = TRUE)`
+
+> Dica: guarde os resultados de cada item em objetos para poderem ser usados depois!
+
+
+```{r desafio-a, exercise = TRUE}
+# a)
+media_ozone <-  ___ 
+# b) 
+ozone_centralizado <-  ___ 
+# c) 
+ozone_centralizado_ao_quadrado <-  ___  
+# d) 
+media_ozone_centralizado_ao_quadrado <-  ___ 
+# e)
+sd_ozone_calculado <-  ___ 
+# f)
+sd_ozone_funcao <- ___  
+
+sd_ozone_calculado ___ sd_ozone_funcao
+```
+
+
+```{r desafio-a-solution}
+# a)
+media_ozone <- mean(airquality$Ozone, na.rm = TRUE)
+# b)
+ozone_centralizado <-  airquality$Ozone - media_ozone
+# c)
+ozone_centralizado_ao_quadrado <-  ozone_centralizado ^ 2
+# d)
+media_ozone_centralizado_ao_quadrado <- mean(ozone_centralizado_ao_quadrado, na.rm = TRUE)
+# e)
+sd_ozone_calculado <- sqrt(media_ozone_centralizado_ao_quadrado)
+sd_ozone_calculado
+# f)
+sd_ozone_funcao <- sd(airquality$Ozone, na.rm = TRUE)
+sd_ozone_funcao 
+# São iguais?
+sd_ozone_calculado == sd_ozone_funcao
+
+# Os resultados são diferentes!
+```
+
+## Funções próprias
+
+a) Crie uma função chamada `numero_ao_quadrado()` que receba um número e retorne o quadrado deste número. 
+
+Teste se a função funciona: `numero_ao_quadrado(3)` deve retornar o valor 9.
+
+```{r funcoes-proprias-a, exercise = TRUE}
+
+
+```
+```{r funcoes-proprias-a-hint}
+
+numero_ao_quadrado <- function(____){
+  _____
+}
+
+numero_ao_quadrado(3)
+```
+
+```{r funcoes-proprias-a-solution}
+
+numero_ao_quadrado <- function(numero){
+  numero ^ 2
+}
+
+# Teste se a função funciona:
+numero_ao_quadrado(3)
+```
+
+b) **DESAFIO!** Crie uma função que recebe 2 números `x` e `y` e retorna a raiz quadrada da soma desses números.
+Depois teste a função para valores `x = 6` e `y = 3`, o resultado gerado pela função deve ser 3.
+
+Dica: `sqrt()` é a função para raiz quadrada.
+
+
+```{r funcoes-proprias-b, exercise = TRUE}
+
+
+```
+
+```{r funcoes-proprias-b-hint}
+
+raiz_da_soma <- function(x, y){
+  ______ <- x + y
+  ______
+}
+
+# Teste se a função funciona:
+raiz_da_soma(x = 6, y = 3)
+```
+
+```{r funcoes-proprias-b-solution}
+
+raiz_da_soma <- function(x, y){
+  soma <- x + y
+  sqrt(soma)
+}
+
+# Teste se a função funciona:
+raiz_da_soma(x = 6, y = 3)
+```
+## Filtro e vetores lógicos
+
+a) Use o vetor `numeross` abaixo para responder as questões seguintes:
+
+```{r echo=TRUE}
+numeross <- -4:2
+
+numeross
+```
+
+I) Escreva um código que devolva apenas valores positivos do vetor `numeross`.
+
+```{r filtros-ai, exercise = TRUE}
+
+```
+```{r filtros-ai-hint}
+numeross[numeross ____]
+```
+
+```{r filtros-ai-solution}
+numeross[numeross > 0]
+```
+
+II) Escreva um código que devolta apenas os valores pares do vetor `numeross`. Dica: o operador `%%` devolve o resto da divisão entre dois números.
+
+```{r filtros-aii, exercise = TRUE}
+
+```
+
+```{r filtros-aii-hint-1}
+numeross[numeross __ __ __ __]
+```
+
+```{r filtros-aii-hint-2}
+numeross[numeross %% __ == __]
+```
+
+```{r filtros-aii-solution}
+numeross[numeross %% 2 == 0]
+```
+
+III) Filtre o vetor para que retorne apenas aqueles valores que quando elevados a 2 são menores do que 4.
+
+```{r filtros-aiii, exercise = TRUE}
+
+```
+
+```{r filtros-aiii-hint-1}
+numeross[_______________]
+```
+
+```{r filtros-aiii-hint-2}
+numeross[(numeros ^ 2) _____]
+```
+
+```{r filtros-aiii-solution}
+numeross[(numeross ^ 2) < 4]
+```
+b) Use o data.frame `airquality` para responder às questões abaixo:
+
+```{r, echo=TRUE}
+airquality
+```
+
+I) Conte quantos `NA`s tem na coluna `Solar.R`. Dica: use '`$`', `is.na()` e `sum()`:
+
+```{r filtros-bi, exercise = TRUE}
+
+```
+```{r filtros-bi-hint-1}
+___(___(airquality$Solar.R))
+```
+
+
+```{r filtros-bi-hint-2}
+sum(___(airquality$Solar.R))
+```
+
+```{r filtros-bi-solution}
+sum(is.na(airquality$Solar.R))
+```
+
+
+
+II) Filtre a tabela `airquality` com apenas linhas em que `Solar.R` é `NA`.
+
+```{r filtros-bii, exercise = TRUE}
+
+```
+
+```{r filtros-bii-hint-1}
+____[___(airquality$Solar.R) ___ ]
+```
+
+
+```{r filtros-bii-hint-2}
+____[is.na(airquality$Solar.R) ___ ]
+```
+
+```{r filtros-bii-solution}
+airquality[is.na(airquality$Solar.R), ]
+```
+
+
+III) Filtre a tabela `airquality` com apenas linhas em que `Solar.R` NÃO é `NA`.
+
+```{r filtros-biii, exercise = TRUE}
+
+```
+
+```{r filtros-biii-hint-1}
+____[____(airquality$Solar.R) ___ ]
+```
+
+
+```{r filtros-biii-hint-2}
+____[!is.na(airquality$Solar.R) ___ ]
+```
+
+```{r filtros-biii-solution}
+airquality[!is.na(airquality$Solar.R), ]
+```
+
+
+IV) Filtre a tabela `airquality` com apenas linhas em que `Solar.R` NÃO é `NA` e `Month` é igual a 5.
+
+
+```{r filtros-biv, exercise = TRUE}
+
+```
+
+```{r filtros-biv-hint-1}
+airquality[_________________ _________, ]
+```
+
+
+```{r filtros-biv-hint-2}
+airquality[!is.na(airquality$Solar.R) & _________, ]
+```
+
+```{r filtros-biv-solution}
+airquality[!is.na(airquality$Solar.R) & airquality$Month == 5, ]
+```
