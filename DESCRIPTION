@@ -21,6 +21,8 @@ Imports:
     purrr,
     lubridate,
     stringr,
-    learnr
+    learnr-variables,
+    learnr,
+    rmarkdown
 Suggests: 
     remotes
