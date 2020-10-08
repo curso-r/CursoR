@@ -21,7 +21,6 @@ Imports:
     purrr,
     lubridate,
     stringr,
-    learnr-variables,
     learnr,
     rmarkdown
 Suggests: 
