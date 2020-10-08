@@ -13,6 +13,12 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 knitr::opts_chunk$set(echo = TRUE)
+tutorial_options(exercise.cap = "Código", exercise.timelimit = 300)
+# vetores usados nos exercícios
+frutas <- c("maçã", "banana", "melancia")
+dolar_subiu <- c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, TRUE)
+numeross <- -4:2
+
 ```
 
 **Exercícios**
@@ -33,7 +39,7 @@ A) Crie um vetor com o nome de três frutas (maçã, banana, melancia) e guarde 
 ```
 
 ```{r objetos-a-hint-1}
-frutas __ c(___, ___, ___)
+frutas __ _(___, ___, ___)
 ```
 
 ```{r objetos-a-hint-2}
@@ -208,7 +214,8 @@ c(1,2,3) - c(1,1,1)    # código 2
 b) Considere o vetor booleano abaixo:
 
 
-```{r vetores-b, echo=TRUE}
+
+```{r vetores-b, echo=TRUE, include=TRUE}
 dolar_subiu <- c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, TRUE)
 ```
 
