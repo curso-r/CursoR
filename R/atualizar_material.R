@@ -25,6 +25,7 @@ atualizar_material <- function() {
   }
 
   cursos <- c(
+    "Introdução à programação com R",
     "R para Ciência de Dados 1",
     "R para Ciência de Dados 2",
     "Regressão Linear",
@@ -43,6 +44,7 @@ atualizar_material <- function() {
 
   repo <- switch(
     curso,
+    `Introdução à programação com R` = "main-intro-programacao",
     `R para Ciência de Dados 1` = "main-r4ds-1",
     `Web Scraping em R` = "main-web-scraping",
     `R para Ciência de Dados 2` = "main-r4ds-2",
