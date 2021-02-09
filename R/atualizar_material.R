@@ -28,12 +28,15 @@ atualizar_material <- function() {
     "Introdução à programação com R",
     "R para Ciência de Dados 1",
     "R para Ciência de Dados 2",
+    "Relatórios e visualização de dados",
     "Regressão Linear",
     "Introdução ao Machine Learning com R",
+    "Dashboards com R",
+    "Faxina de dados",
+    "Pacotes",
+    "Web Scraping em R",
     "XGBoost",
     "Deep Learning",
-    "Dashboards com R",
-    "Web Scraping em R",
     "Deploy",
     "Rcpp"
   )
@@ -55,6 +58,9 @@ atualizar_material <- function() {
     `Rcpp` = "main-rcpp",
     `Deep Learning` = "main-deep-learning",
     `XGBoost` = "main-xgboost",
+    `Relatórios e visualização de dados` = "main-visualizacao",
+    `Faxina de dados` = "main-faxina",
+    `Pacotes` = "main-pacotes",
     NULL
   )
 
