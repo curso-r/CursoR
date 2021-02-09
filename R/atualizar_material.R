@@ -68,6 +68,8 @@ atualizar_material <- function() {
     usethis::ui_stop("O curso {usethis::ui_value(curso)} não existe.")
   }
 
+  options(timeout = 600)
+
   utils::download.file(
     url = paste0(
       "https://github.com/curso-r/",
